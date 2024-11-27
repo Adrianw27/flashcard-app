@@ -1,0 +1,175 @@
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category1' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category2' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category1' already exists.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category3' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category4' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category5' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category6' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category7' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category8' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category9' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Category 'Category10' added successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Maximum number of categories reached.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Flashcard added to category 'Category1' successfully.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Enter the category name: Enter the question: Enter the answer: Category 'NonExistentCategory' does not exist.
+
+Flashcard App Menu:
+1. Add Category
+2. Add Flashcard
+3. Start Quiz
+4. Exit
+Enter your choice (1-4): Error reading input. Exiting.

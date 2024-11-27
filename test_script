@@ -1,0 +1,25 @@
+#!/bin/bash
+
+make coverage
+
+echo "Running tests"
+./flashcardapp < test_inputs.txt > test_results.txt
+
+echo "Generating gcov report"
+mkdir -p coverage
+for file in main.c storage.c quiz_logic.c; do
+    gcov -o . $file
+done
+
+mv *.gcov coverage/
+
+echo "Comparing actual output with expected output"
+diff -u test_outputs.txt test_results.txt > output_diff.txt
+
+if [ -s output_diff.txt ]; then
+    echo "Test failed: Differences found between actual and expected outputs." > test_results.txt
+    echo "See 'output_diff.txt' for details." >> test_results.txt
+else
+    echo "Test passed: Actual output matches expected output." > test_results.txt
+    rm output_diff.txt
+fi
