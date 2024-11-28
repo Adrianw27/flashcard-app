@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Make Convert Tool in Bin
-      run: make flashcardapp
+      run: make flashcardapp; chmod 755 ./test_script
       
     - name: Run Tests
       run: ./test_script 
