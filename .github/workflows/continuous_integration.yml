@@ -1,43 +1,18 @@
-on:
+name: build script for flashcardapp
+
+on:							
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]			
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build:						
+    runs-on: ubuntu-latest			
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4		
 
-    - name: Make Convert Tool in Bin
-      run: make flashcardapp
-        
-    - name: Upload Executables
-      uses: actions/upload-artifact@v4
-      with:
-        name: Executables
-        path: ./flashcard
+      - name: build flashcardapp	
+        run: make flashcardapp
+     
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Make Convert Tool in Bin
-      run: make flashcardapp; chmod 755 ./test_script
       
-    - name: Run Tests
-      run: ./test_script 
-
-    - name: Upload Test Results
-      if: ${{ always() }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: Test Results
-        path: ./test_results.txt
-
-    - name: Upload Gcov Results
-      if: ${{ always() }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: Gcov Results
-        path: ./coverage/*
+        
