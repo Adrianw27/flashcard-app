@@ -1,12 +1,35 @@
 // main.c
 
-#include <stdio.h>   
-#include <string.h>  
-#include <stdlib.h>  
+/*
+ * Flashcard Application
+ * ---------------------
+ * This is the main entry point for the Flashcard App, which allows users to:
+ * - Add categories
+ * - Add flashcards to existing categories
+ * - Start quizzes based on categories
+ * - Display help information
+ *
+ * Dependencies:
+ * - GTK 4.0
+ * - storage.h (Handles storage and category management)
+ * - quiz_logic.h (Implements quiz logic)
+ */
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <gtk/gtk.h>  // GTK 4.0
 #include "storage.h"
 #include "quiz_logic.h"
 
+/*
+ * Function: display_help
+ * ----------------------
+ * Displays a help message detailing the usage of the Flashcard App.
+ *
+ * Parameters: None
+ * Returns: None
+ */
 void display_help() {
     printf("Flashcard App Help\n");
     printf("------------------\n");
@@ -25,6 +48,14 @@ void display_help() {
     printf("Note: The application does not save data between sessions.\n");
 }
 
+/*
+ * Function: display_menu
+ * ----------------------
+ * Displays the interactive menu for the Flashcard App.
+ *
+ * Parameters: None
+ * Returns: None
+ */
 void display_menu() {
     printf("\nFlashcard App Menu:\n");
     printf("1. Add Category\n");
@@ -34,6 +65,19 @@ void display_menu() {
     printf("Enter your choice (1-4): ");
 }
 
+/*
+ * Function: main
+ * --------------
+ * Main function that initializes the application, handles user input, and
+ * manages the interactive menu for the Flashcard App.
+ *
+ * Parameters:
+ * - argc: Argument count
+ * - argv: Argument vector (list of command-line arguments)
+ *
+ * Returns:
+ * - 0 on successful execution
+ */
 int main(int argc, char *argv[]) {
     if (argc > 1 && strcmp(argv[1], "--help") == 0) {
         display_help();
@@ -45,7 +89,9 @@ int main(int argc, char *argv[]) {
 
     int choice;
     char input_buffer[256];
-    initialize_storage(); 
+
+    // Initialize storage for categories and flashcards
+    initialize_storage();
 
     while (1) {
         display_menu();
@@ -56,6 +102,7 @@ int main(int argc, char *argv[]) {
         choice = atoi(input_buffer);
 
         if (choice == 1) {
+            // Add Category
             char category_name[MAX_CATEGORY_NAME_LENGTH];
             printf("Enter the category name: ");
             if (fgets(category_name, MAX_CATEGORY_NAME_LENGTH, stdin) == NULL) {
@@ -72,6 +119,7 @@ int main(int argc, char *argv[]) {
                 printf("Maximum number of categories reached.\n");
             }
         } else if (choice == 2) {
+            // Add Flashcard
             char category_name[MAX_CATEGORY_NAME_LENGTH];
             char question[MAX_QUESTION_LENGTH];
             char answer[MAX_ANSWER_LENGTH];
@@ -116,13 +164,16 @@ int main(int argc, char *argv[]) {
             category_name[strcspn(category_name, "\n")] = '\0';
             start_quiz(category_name);
         } else if (choice == 4) {
+            // Exit
             printf("Exiting the Flashcard App. Goodbye!\n");
             break;
         } else {
+            // Invalid Input
             printf("Invalid choice. Please enter a number between 1 and 4.\n");
         }
     }
 
-    free_storage(); 
+    // Free resources allocated for storage
+    free_storage();
     return 0;
 }

@@ -1,17 +1,16 @@
 CC = gcc
 
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g $(shell pkg-config --cflags gtk4)
+LDFLAGS = $(shell pkg-config --libs gtk4)
 
 SRC = main.c storage.c quiz_logic.c
-
 OBJ = $(SRC:.c=.o)
-
 APP = flashcardapp
 
 all: $(APP)
 
 $(APP): $(OBJ)
-	$(CC) $(CFLAGS) -o $(APP) $(OBJ)
+	$(CC) $(CFLAGS) -o $(APP) $(OBJ) $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
