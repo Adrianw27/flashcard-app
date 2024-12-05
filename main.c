@@ -1,6 +1,9 @@
-#include <stdio.h>  
+// main.c
+
+#include <stdio.h>   
 #include <string.h>  
 #include <stdlib.h>  
+#include <gtk/gtk.h>  // GTK 4.0
 #include "storage.h"
 #include "quiz_logic.h"
 
@@ -37,6 +40,9 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
+    // Initialize GTK
+    gtk_init();
+
     int choice;
     char input_buffer[256];
     initialize_storage(); 
@@ -50,14 +56,12 @@ int main(int argc, char *argv[]) {
         choice = atoi(input_buffer);
 
         if (choice == 1) {
-            
             char category_name[MAX_CATEGORY_NAME_LENGTH];
             printf("Enter the category name: ");
             if (fgets(category_name, MAX_CATEGORY_NAME_LENGTH, stdin) == NULL) {
                 printf("Error reading input.\n");
                 continue;
             }
-            
             category_name[strcspn(category_name, "\n")] = '\0';
             int result = add_category(category_name);
             if (result == 1) {
@@ -68,7 +72,6 @@ int main(int argc, char *argv[]) {
                 printf("Maximum number of categories reached.\n");
             }
         } else if (choice == 2) {
-            
             char category_name[MAX_CATEGORY_NAME_LENGTH];
             char question[MAX_QUESTION_LENGTH];
             char answer[MAX_ANSWER_LENGTH];
@@ -113,7 +116,6 @@ int main(int argc, char *argv[]) {
             category_name[strcspn(category_name, "\n")] = '\0';
             start_quiz(category_name);
         } else if (choice == 4) {
-            
             printf("Exiting the Flashcard App. Goodbye!\n");
             break;
         } else {
