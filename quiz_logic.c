@@ -68,11 +68,7 @@ void on_activate(GtkApplication *app, gpointer user_data) {
     // Load and set the image
     image = gtk_image_new_from_file("happy.png");
 
-    if (image == NULL) {
-        g_printerr("Error: Unable to load image 'happy.png'.\n");
-        g_application_quit(G_APPLICATION(app));
-        return;
-    }
+  
 
     gtk_window_set_child(GTK_WINDOW(window), image);
 
