@@ -1,8 +1,8 @@
-name: build script for flashcardapp
+name: CI pipeline for flashcardapp
 
 on:							
   push:
-    branches: [ "Adrians-code" ]			
+    branches: [ "main" ]			
 
 jobs:
 
@@ -31,7 +31,7 @@ jobs:
               
       - name: Run Tests
         run: ./test_quiz; ./test_storage
-        
+
       - name: Upload Gcov Results
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
