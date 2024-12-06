@@ -25,16 +25,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Make Convert Tool in Bin
-        run: make flashcardapp
+      - uses: actions/checkout@v4		
+      - name: Install GTK4 and make app
+        run: sudo apt-get update && sudo apt-get install -y libgtk-4-dev; make flashcardapp
               
       - name: Run Tests
         run: ./test_quiz; ./test_storage
         
-      - name: Upload Test Results
+      - name: Upload Test Scrips
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: Test Results
-          path: ./coverage/*.gcov
+          path: ./test_quiz; ./test_storage
+
+      - name: Upload Gcov Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test Results
+          path: ./*.gcov
