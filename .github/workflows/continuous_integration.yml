@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Make Convert Tool in Bin
-        run: make flashcardapp; chmod 755 ./test_script
+        run: make flashcardapp
               
       - name: Run Tests
         run: ./test_quiz; ./test_storage
@@ -37,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Test Results
-          path: ./*.gcov
+          path: ./coverage/*.gcov
