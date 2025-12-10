@@ -1,0 +1,169 @@
+        -:    0:Source:quiz_logic.c
+        -:    0:Graph:test_quiz-quiz_logic.gcno
+        -:    0:Data:test_quiz-quiz_logic.gcda
+        -:    0:Runs:1
+        -:    1:// quiz_logic.c
+        -:    2:
+        -:    3:/*
+        -:    4: * Quiz Logic Implementation
+        -:    5: * -------------------------
+        -:    6: * This file contains the logic for managing quizzes, including:
+        -:    7: * - Comparing user answers to correct answers
+        -:    8: * - Displaying visual feedback for correct answers
+        -:    9: * - Converting strings to lowercase for case-insensitive comparison
+        -:   10: *
+        -:   11: * Dependencies:
+        -:   12: * - quiz_logic.h: Interface for quiz-related functions
+        -:   13: * - storage.h: Provides category and flashcard data
+        -:   14: * - GTK and GLib: For graphical feedback
+        -:   15: */
+        -:   16:
+        -:   17:#include "quiz_logic.h"
+        -:   18:#include "storage.h"
+        -:   19:#include <stdio.h>
+        -:   20:#include <string.h>
+        -:   21:#include <ctype.h>
+        -:   22:#include <stdlib.h>
+        -:   23:#include <gtk/gtk.h>
+        -:   24:#include <glib.h>
+        -:   25:
+        -:   26:/*
+        -:   27: * Function: to_lowercase
+        -:   28: * ----------------------
+        -:   29: * Converts a given string to lowercase.
+        -:   30: *
+        -:   31: * Parameters:
+        -:   32: * - input: The input string to convert.
+        -:   33: * - output: The output buffer where the lowercase string is stored.
+        -:   34: *
+        -:   35: * Returns: None
+        -:   36: */
+        5:   37:void to_lowercase(char input[], char output[]) {
+        5:   38:    int i = 0;
+       14:   39:    while (input[i] != '\0') {
+        9:   40:        output[i] = tolower((unsigned char)input[i]);
+        9:   41:        i++;
+        -:   42:    }
+        5:   43:    output[i] = '\0';  // Null-terminate the output string
+        5:   44:}
+        -:   45:
+        -:   46:/*
+        -:   47: * Function: on_activate
+        -:   48: * ---------------------
+        -:   49: * Callback function for GTK application activation. Displays an image
+        -:   50: * to indicate a correct answer.
+        -:   51: *
+        -:   52: * Parameters:
+        -:   53: * - app: The GTK application instance.
+        -:   54: * - user_data: Pointer to additional user data (unused here).
+        -:   55: *
+        -:   56: * Returns: None
+        -:   57: */
+        2:   58:void on_activate(GtkApplication *app, gpointer user_data) {
+        -:   59:    GtkWidget *window;
+        -:   60:    GtkWidget *image;
+        -:   61:
+        -:   62:    // Create and configure the GTK window
+        2:   63:    window = gtk_application_window_new(app);
+        2:   64:    gtk_window_set_title(GTK_WINDOW(window), "Correct Answer!");
+        2:   65:    gtk_window_set_default_size(GTK_WINDOW(window), 200, 200);
+        2:   66:    gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
+        -:   67:
+        -:   68:    // Load and set the image
+        2:   69:    image = gtk_image_new_from_file("happy.png");
+        -:   70:
+        -:   71:  
+        -:   72:
+        2:   73:    gtk_window_set_child(GTK_WINDOW(window), image);
+        -:   74:
+        -:   75:    // Display the window
+        2:   76:    gtk_window_present(GTK_WINDOW(window));
+        2:   77:}
+        -:   78:
+        -:   79:/*
+        -:   80: * Function: show_happy_image
+        -:   81: * --------------------------
+        -:   82: * Creates and runs a GTK application to show a "happy" image when the user
+        -:   83: * answers correctly.
+        -:   84: *
+        -:   85: * Parameters: None
+        -:   86: * Returns: None
+        -:   87: */
+        2:   88:void show_happy_image() {
+        -:   89:    // Create a new GTK application
+        2:   90:    GtkApplication *app = gtk_application_new("com.example.GtkApp", G_APPLICATION_FLAGS_NONE);
+        -:   91:
+        -:   92:    // Connect the activation signal to the on_activate callback
+        2:   93:    g_signal_connect(app, "activate", G_CALLBACK(on_activate), NULL);
+        -:   94:
+        -:   95:    // Run the application
+        2:   96:    g_application_run(G_APPLICATION(app), 0, NULL);
+        -:   97:
+        -:   98:    // Clean up the application object
+        2:   99:    g_object_unref(app);
+        2:  100:}
+        -:  101:
+        -:  102:/*
+        -:  103: * Function: start_quiz
+        -:  104: * --------------------
+        -:  105: * Starts a quiz for the given category. The user is prompted with each question,
+        -:  106: * and their answers are compared with the correct answers. Visual feedback is provided
+        -:  107: * for correct answers.
+        -:  108: *
+        -:  109: * Parameters:
+        -:  110: * - category_name: The name of the category for the quiz.
+        -:  111: *
+        -:  112: * Returns: None
+        -:  113: */
+        4:  114:void start_quiz(char category_name[]) {
+        4:  115:    int category_index = find_category_index(category_name);
+        4:  116:    if (category_index == -1) {
+        1:  117:        printf("Category '%s' not found.\n", category_name);
+        1:  118:        return;
+        -:  119:    }
+        3:  120:    if (flashcard_counts[category_index] == 0) {
+        1:  121:        printf("No flashcards in category '%s'.\n", category_name);
+        1:  122:        return;
+        -:  123:    }
+        -:  124:
+        2:  125:    int total_questions = flashcard_counts[category_index];
+        2:  126:    int correct_answers = 0;
+        -:  127:
+        -:  128:    // Loop through all questions in the category
+        6:  129:    for (int i = 0; i < total_questions; i++) {
+        -:  130:        char question[MAX_QUESTION_LENGTH];
+        -:  131:        char correct_answer[MAX_ANSWER_LENGTH];
+        -:  132:
+        4:  133:        strcpy(question, flashcard_questions[category_index][i]);
+        4:  134:        strcpy(correct_answer, flashcard_answers[category_index][i]);
+        -:  135:
+        4:  136:        printf("\nQuestion %d: %s\n", i + 1, question);
+        -:  137:
+        -:  138:        char user_answer[MAX_ANSWER_LENGTH];
+        4:  139:        printf("Your Answer: ");
+        4:  140:        if (fgets(user_answer, MAX_ANSWER_LENGTH, stdin) == NULL) {
+        2:  141:            printf("Error reading input.\n");
+        2:  142:            continue;
+        -:  143:        }
+        2:  144:        user_answer[strcspn(user_answer, "\n")] = '\0';
+        -:  145:
+        -:  146:        // Convert answers to lowercase for case-insensitive comparison
+        -:  147:        char user_answer_lower[MAX_ANSWER_LENGTH];
+        -:  148:        char correct_answer_lower[MAX_ANSWER_LENGTH];
+        2:  149:        to_lowercase(user_answer, user_answer_lower);
+        2:  150:        to_lowercase(correct_answer, correct_answer_lower);
+        -:  151:
+        2:  152:        if (strcmp(user_answer_lower, correct_answer_lower) == 0) {
+        2:  153:            printf("Correct!\n");
+        2:  154:            correct_answers++;
+        -:  155:
+        -:  156:            // Show happy image for correct answer
+        2:  157:            show_happy_image();
+        -:  158:        } else {
+    #####:  159:            printf("Incorrect. The correct answer is: %s\n", correct_answer);
+        -:  160:        }
+        -:  161:    }
+        -:  162:
+        2:  163:    printf("\nYou answered %d out of %d questions correctly in the '%s' category.\n",
+        -:  164:           correct_answers, total_questions, category_name);
+        -:  165:}
